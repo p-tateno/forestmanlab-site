@@ -1,0 +1,508 @@
+// 本文の文字サイズと行間。ここにある2つの値を変更してください。
+$body-font-size: 21.6px;
+$body-line-height: 1.9;
+
+// 本文だけに適用。サイドバーやページタイトルのサイズは維持します。
+.center > article,
+.center > .popover-hint > article {
+  font-size: $body-font-size;
+  line-height: $body-line-height;
+
+  p,
+  li,
+  blockquote,
+  table {
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  // Quartzの内部リンクに設定された固定の行間を解除します。
+  a.internal {
+    line-height: inherit;
+  }
+}
+
+// パンくずリストと記事タイトルの間に追加する余白。
+$article-title-top-space: 1rem;
+
+.center .article-title {
+  padding-block-start: $article-title-top-space;
+}
+
+// フォルダ一覧：日付とタイトルの文字の基準線を揃えます。
+.center .section-ul > .section-li > .section {
+  align-items: baseline;
+
+  > .meta {
+    margin-block: 0;
+  }
+
+  > .desc > h3 {
+    margin: 0;
+    line-height: inherit;
+
+    > a.internal {
+      line-height: inherit;
+    }
+  }
+}
+
+// 記事一覧の各項目の間隔。大きくすると一覧の行間が広がります。
+$article-list-item-gap: 1.5rem;
+
+.center .section-ul > .section-li {
+  margin-block-end: 0;
+
+  + .section-li {
+    margin-block-start: $article-list-item-gap;
+  }
+}
+
+// Explorerのタイトルは行の長さを整えず、右端まで使って折り返します。
+.sidebar.left .explorer .explorer-content li > a {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  white-space: normal;
+  text-wrap: wrap;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  line-break: auto;
+}
+
+// パンくずのないトップページでは、サイト名と記事タイトルの上端を揃えます。
+.center .page-header:not(:has(.breadcrumb-container)) .article-title {
+  padding-block-start: 0;
+  margin-block-start: 0;
+}
+
+// 右サイドバーの機能は非表示にします。
+.page > #quartz-body > .sidebar.right {
+  display: none;
+}
+
+@media (min-width: 801px) {
+  .page > #quartz-body > .sidebar.left {
+    overflow-y: auto;
+
+    > .explorer,
+    > .graph {
+      flex-shrink: 0;
+    }
+  }
+}
+
+// Graph Viewの背景：白とサイドバーの背景色を半分ずつ混ぜます。
+html[saved-theme="light"] body .sidebar.left .graph > .graph-outer {
+  background-color: color-mix(in srgb, #fff 50%, var(--tab-container-background, #f6f6f6) 50%);
+}
+
+// 記事タイトルはテーマの基準サイズから20%拡大します。
+html body .center h1.article-title {
+  font-family: var(--font-interface, ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif) !important;
+  font-weight: 700;
+  font-size: calc(var(--inline-title-size, 1.75rem) * 1.2);
+}
+
+// 広い画面では左右に同じ幅を確保し、本文をウィンドウ中央に配置します。
+// 右の列は空白のまま残し、本文幅を元の3列レイアウトに戻します。
+@media (min-width: 1201px) {
+  .page > #quartz-body {
+    grid-template-columns: 320px minmax(0, 1fr) 320px;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "grid-sidebar-left grid-header grid-sidebar-right"
+      "grid-sidebar-left grid-center grid-sidebar-right"
+      "grid-sidebar-left grid-footer grid-sidebar-right";
+  }
+}
+
+// ライトモードではサイドバーと外側の余白を白に統一します。
+html[saved-theme="light"] body,
+html[saved-theme="light"] body #quartz-root.page,
+html[saved-theme="light"] body #quartz-root.page > #quartz-body,
+html[saved-theme="light"] body #quartz-root.page > #quartz-body .sidebar,
+html[saved-theme="light"] body #quartz-root.page > #quartz-body .sidebar.left:has(.explorer),
+html[saved-theme="light"] body #quartz-root.page > #quartz-body .sidebar.left .explorer-content {
+  background-color: #fff;
+}
+
+// 本文の段落は両端揃え。段落末の行は左揃えにします。
+.center > article p,
+.center > .popover-hint > article p {
+  text-align: justify;
+  text-align-last: start;
+  text-wrap: wrap;
+}
+
+// 日付・読了時間の後にある本文冒頭の段落の余白を2.5倍にします。
+$body-opening-gap: $body-font-size * 2.5;
+
+.center:has(.page-header .content-meta) > article > .markdown-preview-view > p:first-child,
+.center:has(.page-header .content-meta) > .popover-hint > article > .markdown-preview-view > p:first-child {
+  margin-block-start: $body-opening-gap;
+}
+
+// 内部リンクのマーカー風の背景をなくします。
+html body a.internal,
+html body a.internal:hover {
+  background-color: transparent;
+}
+
+// パンくずリストを従来の80%のサイズにします。
+.center .breadcrumb-container {
+  font-size: 0.8em;
+}
+
+// 英字・日本語・区切り記号を同じ行の高さと文字の基準線で揃えます。
+.center .breadcrumb-container {
+  align-items: baseline;
+  line-height: 1.5;
+
+  .breadcrumb-element {
+    align-items: baseline;
+    line-height: inherit;
+
+    > a,
+    > p {
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    > p {
+      margin-block: 0;
+    }
+  }
+}
+
+// フォルダのindex.mdも通常の記事と同じ本文サイズにします。
+.center > .popover-hint > article {
+  font-size: $body-font-size;
+}
+
+// トップページだけ日付・読了時間を非表示にします。
+body[data-slug="index"] .center .page-header .content-meta {
+  display: none;
+}
+
+// スマートフォンでは本文を読みやすいサイズと行間にします。
+@media (max-width: 800px) {
+  .center > article {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .center > .popover-hint > article {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+}
+
+// フォルダ内の件数はパンくずと同じサイズで控えめに表示します。
+.center .page-listing > p {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--gray);
+}
+
+// 日付・読了時間とフォルダ件数を、一覧の日付と同じ色・濃さに揃えます。
+html body .center .content-meta,
+html body .center .page-listing > p {
+  color: var(--nav-item-color, var(--darkgray));
+  opacity: 0.6;
+}
+
+// スマートフォンの記事一覧は日付・タイトルの2列で右端まで使います。
+@media (max-width: 800px) {
+  .center .section-ul > .section-li > .section {
+    grid-template-columns: max-content minmax(0, 1fr);
+
+    > .tags {
+      display: none;
+    }
+
+    > .desc {
+      min-width: 0;
+    }
+
+    > .desc > h3 > a {
+      text-wrap: wrap;
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+// デスクトップでもタグが空の行は、日付とタイトルの2列で表示します。
+@media (min-width: 801px) {
+  .center .section-ul > .section-li > .section:not(:has(> .tags > li)) {
+    grid-template-columns: max-content minmax(0, 1fr);
+
+    > .tags {
+      display: none;
+    }
+
+    > .desc {
+      min-width: 0;
+    }
+
+    > .desc > h3 > a {
+      text-wrap: wrap;
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+// フォルダ内の記事一覧のタイトルは通常の太さにします。
+html body .center .section-ul > .section-li > .section > .desc > h3,
+html body .center .section-ul > .section-li > .section > .desc > h3 > a {
+  font-weight: 400;
+}
+
+// 自動生成の記事一覧も、本文中のリンクと同じ色にします。
+html body .center .section-ul > .section-li > .section > .desc > h3 > a {
+  color: var(--link-color, var(--secondary));
+
+  &:hover {
+    color: var(--link-color-hover, var(--tertiary));
+  }
+}
+
+// Obsidianで本文に配置した内部リンクも、記事一覧と同じホバー色にします。
+html body .center article a.internal:not(.tag-link),
+html body .center article a.internal-link:not(.tag-link) {
+  color: var(--link-color, var(--secondary));
+
+  &:hover {
+    color: var(--link-color-hover, var(--tertiary));
+  }
+}
+
+// Keep the wide-screen page gutters on the body background in both themes.
+html[saved-theme] body[data-slug] #quartz-root.page {
+  background: transparent !important;
+}
+
+// Compact tags in the generated folder listing.
+html body .center .section-ul > .section-li > .section > ul.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-content: start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  > li {
+    display: flex;
+    flex: none;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    line-height: normal;
+    list-style: none;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+
+    &::marker { content: ""; }
+
+    > a {
+      display: block;
+      margin: 0;
+      border: 0;
+      box-shadow: none;
+      width: auto;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 0.2em 0.65em;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--darkgray) 8%, transparent);
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+// Desktop listing: date beside the title, horizontal tags beneath the title.
+@media (min-width: 801px) {
+  html body .center .section-ul > .section-li > .section {
+    grid-template-columns: max-content minmax(0, 1fr);
+    row-gap: 0.5rem;
+
+    > .meta { grid-column: 1; grid-row: 1; }
+    > .desc { grid-column: 2; grid-row: 1; min-width: 0; }
+
+    > ul.tags {
+      display: flex;
+      grid-column: 2;
+      grid-row: 2;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 0.5rem;
+    }
+
+    > ul.tags:not(:has(> li)) { display: none; }
+  }
+}
+
+// Tags at the end of a note, before the footer divider.
+html body .center article ul.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+
+  > li {
+    display: flex;
+    list-style: none;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    &::marker { content: ""; }
+
+    > a {
+      display: block;
+      margin: 0;
+      border: 0;
+      box-shadow: none;
+      padding: 0.2em 0.65em;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--darkgray) 8%, transparent);
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+// Training log: quiet date column and a wrapping text column.
+html body[data-slug^="走る/"][data-slug*="練習記録"] .center article {
+  .table-container {
+    overflow: visible;
+    margin-block: 1.5rem;
+  }
+
+  table {
+    display: table;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-interface, var(--bodyFont));
+    font-size: inherit;
+    line-height: inherit;
+
+    thead:not(:has(th:not(:empty))) { display: none; }
+    tbody, tr, td, th {
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      line-height: inherit;
+    }
+    td, th {
+      min-width: 0;
+      padding: 0.65em 0;
+      vertical-align: baseline;
+      text-align: left;
+    }
+    td:first-child, th:first-child {
+      width: 1%;
+      white-space: nowrap;
+      padding-inline-end: 1.25em;
+      color: var(--nav-item-color, var(--darkgray));
+      opacity: 0.6;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.85em;
+    }
+    td:not(:first-child), th:not(:first-child) {
+      overflow-wrap: anywhere;
+      color: var(--text-muted, #5c5c5c);
+      font-size: $body-font-size;
+      font-weight: 400;
+      line-height: 1.6;
+
+      p { color: inherit; font-size: inherit; line-height: inherit; margin-block: 0; }
+    }
+  }
+}
+@media (max-width: 800px) {
+  html body[data-slug^="走る/"][data-slug*="練習記録"] .center article table {
+    td:first-child, th:first-child { padding-inline-end: 0.8em; font-size: 0.85em; }
+  }
+}
+
+@media (max-width: 800px) {
+  html body[data-slug^="走る/"][data-slug*="練習記録"] .center article table td:not(:first-child) {
+    font-size: 18px;
+  }
+}
+
+// Use the body paragraph font for tables throughout the site.
+html body .center article table,
+html body .center article table :is(thead, tbody, tfoot, tr, th, td) {
+  font-family: var(--font-interface, ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif) !important;
+}
+
+// Hashtags written inside the note use the same compact pills.
+html body .center article a.tag-link {
+  display: inline-flex;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.2em 0.65em;
+  border: 0;
+  box-shadow: none;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--darkgray) 8%, transparent);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+html body .center article p.body-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-align: start;
+}
+
+// Highlighted text follows the surrounding paragraph typography.
+html body .center article .text-highlight,
+html body .center article mark {
+  font-family: inherit !important;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit !important;
+}
+
+// Article links use the same font as body paragraphs.
+html body .center article a {
+  font-family: var(--font-interface, ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif) !important;
+}
+
+// Keep emphasis in the body typeface while preserving bold/italic styles.
+html body .center article :is(strong, b, em, i) {
+  font-family: var(--font-interface, ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif) !important;
+}
+
+// Generated navigation and listings share the paragraph font as well.
+html body .center a,
+html body .center :is(.section-ul, .breadcrumb-container, .content-meta, .page-listing),
+html body .center :is(.section-ul, .breadcrumb-container, .content-meta, .page-listing) * {
+  font-family: var(--font-interface, ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif) !important;
+}
