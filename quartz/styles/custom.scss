@@ -18,11 +18,14 @@
 
 :root[saved-theme="dark"] {
   --light: #001f0b;
+  --secondary: #d4e5b7;
   --site-nav-color: #fff;
 }
 
 html,
-body {
+body,
+#quartz-root,
+#quartz-body {
   background-color: var(--light);
 }
 
