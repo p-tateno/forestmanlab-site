@@ -5,5 +5,6 @@ title: FORESTMAN LAB
 
 準備中です。
 
-Mandala Engine for Obsidian Plugin
+1. Mandala Engine for Obsidian Plugin
+2. 
 
