@@ -7,16 +7,25 @@
 :root {
   --light: #d4e5b7;
   --secondary: #006934;
+  --tab-container-background: var(--light);
+  --link-color: var(--secondary);
+  --link-color-hover: var(--secondary);
+  --link-external-color: var(--secondary);
+  --link-external-color-hover: var(--secondary);
+  --link-unresolved-color: var(--secondary);
+  --site-nav-color: #000;
 }
 
 :root[saved-theme="dark"] {
   --light: #001f0b;
+  --site-nav-color: #fff;
 }
 
+html,
 body {
   background-color: var(--light);
 }
 
-a {
+article a {
   color: var(--secondary);
 }

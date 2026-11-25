@@ -28,13 +28,12 @@ export const CustomSiteHeader: QuartzTransformerPlugin = () => ({
           display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
           color: var(--dark); font-size: 1rem; line-height: 1.5;
         }
-        #site-topbar a { color: var(--secondary); background: none; text-decoration: none; font-weight: 400; }
+        #site-topbar a { color: var(--site-nav-color); background: none; text-decoration: none; font-weight: 400; }
         #site-topbar .site-identity { display: flex; align-items: baseline; gap: 0.5em; min-width: 0; white-space: nowrap; }
         #site-topbar .site-name { font-size: 1.6em; font-weight: 700; }
         #site-topbar .site-section { color: var(--gray); font-weight: 400; }
         #site-topbar .site-links { display: flex; gap: 0.7em; align-items: center; white-space: nowrap; }
-        #site-topbar a:hover { color: var(--secondary); }
-        #site-topbar a[aria-current] { color: var(--secondary); }
+        #site-topbar a:hover, #site-topbar a:focus-visible { color: var(--secondary); }
         #site-topbar .site-theme-switch {
           display: grid; place-items: center; flex: 0 0 auto; width: 36px; height: 36px;
           border: 1px solid var(--lightgray); border-radius: 18px; padding: 0;
