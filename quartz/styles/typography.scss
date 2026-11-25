@@ -124,7 +124,7 @@ html[saved-theme="light"] body #quartz-root.page > #quartz-body,
 html[saved-theme="light"] body #quartz-root.page > #quartz-body .sidebar,
 html[saved-theme="light"] body #quartz-root.page > #quartz-body .sidebar.left:has(.explorer),
 html[saved-theme="light"] body #quartz-root.page > #quartz-body .sidebar.left .explorer-content {
-  background-color: #fff;
+  background-color: var(--light);
 }
 
 // 本文の段落は両端揃え。段落末の行は左揃えにします。
