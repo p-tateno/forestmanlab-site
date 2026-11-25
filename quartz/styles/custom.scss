@@ -25,7 +25,9 @@
 html,
 body,
 #quartz-root,
-#quartz-body {
+#quartz-body,
+#quartz-body > .center,
+#quartz-body > footer {
   background-color: var(--light);
 }
 

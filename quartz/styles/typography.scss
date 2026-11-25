@@ -117,7 +117,7 @@ html body .center h1.article-title {
   }
 }
 
-// ライトモードではサイドバーと外側の余白を白に統一します。
+// ライトモードではサイドバーと外側の余白にテーマの背景色を使います。
 html[saved-theme="light"] body,
 html[saved-theme="light"] body #quartz-root.page,
 html[saved-theme="light"] body #quartz-root.page > #quartz-body,
