@@ -2,3 +2,21 @@
 @use "./typography.scss";
 
 // put your custom CSS here!
+
+// Keep the site palette above the Quartz and Obsidian theme layers.
+:root {
+  --light: #d4e5b7;
+  --secondary: #006934;
+}
+
+:root[saved-theme="dark"] {
+  --light: #001f0b;
+}
+
+body {
+  background-color: var(--light);
+}
+
+a {
+  color: var(--secondary);
+}
